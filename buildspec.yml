@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install
+      - npm install sls
+  pre_build:
+    commands: 
+      - echo "we are in prebuild phase"    
+  build:
+    commands:
+      - npm test
+  post_build:
+    commands:
+      - npm run sls -- deploy --path ./ -- stage ${SERVERLESS_STAGE} -- conceal --versbose
